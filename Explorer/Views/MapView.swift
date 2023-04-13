@@ -9,16 +9,35 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     
-    @Binding var currentLocation: CLLocationCoordinate2D?
+    @Binding var currentLocation: CLLocationCoordinate2D
+    
+    var lookAroundScene: MKLookAroundScene?
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation?.latitude ?? 65.0, longitude: self.currentLocation?.longitude ?? 65.0), span: MKCoordinateSpan.init(latitudeDelta: 50, longitudeDelta: 50)), animated: true)
+        mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 65.0, longitude: 50.0),
+                                                  span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)),
+                                                    animated: true)
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation?.latitude ?? 65.0, longitude: self.currentLocation?.longitude ?? 65.0), span: MKCoordinateSpan.init(latitudeDelta: 5, longitudeDelta: 5)), animated: true)
+        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.latitude,
+                                                                                     longitude: self.currentLocation.longitude),
+                                                 span: MKCoordinateSpan.init(latitudeDelta: 5, longitudeDelta: 5)),
+                         animated: true)
+        self.searchLookAround(for: currentLocation)
     }
     
+   func searchLookAround(for location: CLLocationCoordinate2D){
+        let sceneRequest = MKLookAroundSceneRequest(coordinate: location)
+        
+        sceneRequest.getSceneWithCompletionHandler { scene, error in
+            if let error {
+                print(error)
+            }
+            else if let scene {
+            }
+        }
+    }
 }

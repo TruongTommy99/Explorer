@@ -10,7 +10,7 @@ import MapKit
 
 struct SuggestedLocation {
     let name: String
-    let coordinate: CLLocationCoordinate2D
+    var coordinate: CLLocationCoordinate2D
     let spots: [Spot]
 }
 
