@@ -18,6 +18,8 @@
 		B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */; };
 		B215E95229E8445000EFBDED /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95129E8445000EFBDED /* ViewModifier.swift */; };
 		B215E95429E86DC600EFBDED /* MapViewConfigurationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95329E86DC600EFBDED /* MapViewConfigurationEnum.swift */; };
+		B294A88229E8801A00821D26 /* ContentView + MapConfigurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294A88129E8801A00821D26 /* ContentView + MapConfigurationPicker.swift */; };
+		B294A88729E8851900821D26 /* MapConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294A88629E8851900821D26 /* MapConfigurations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
 		B215E95129E8445000EFBDED /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 		B215E95329E86DC600EFBDED /* MapViewConfigurationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewConfigurationEnum.swift; sourceTree = "<group>"; };
+		B294A88129E8801A00821D26 /* ContentView + MapConfigurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView + MapConfigurationPicker.swift"; sourceTree = "<group>"; };
+		B294A88629E8851900821D26 /* MapConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConfigurations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 			children = (
 				654A069029E51DC200E2D9E7 /* SuggestLocations + Spot.swift */,
 				B215E94A29E791B000EFBDED /* SuggestedLocationSample.swift */,
+				B294A88629E8851900821D26 /* MapConfigurations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 				654A068E29E5121A00E2D9E7 /* MapView.swift */,
 				B215E94C29E798FE00EFBDED /* InformationSheet.swift */,
 				B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */,
+				B294A88129E8801A00821D26 /* ContentView + MapConfigurationPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,7 +191,9 @@
 				B215E94B29E791B000EFBDED /* SuggestedLocationSample.swift in Sources */,
 				B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */,
 				654A068129E50FF800E2D9E7 /* ContentView.swift in Sources */,
+				B294A88729E8851900821D26 /* MapConfigurations.swift in Sources */,
 				B215E94D29E798FE00EFBDED /* InformationSheet.swift in Sources */,
+				B294A88229E8801A00821D26 /* ContentView + MapConfigurationPicker.swift in Sources */,
 				B215E95429E86DC600EFBDED /* MapViewConfigurationEnum.swift in Sources */,
 				654A068F29E5121A00E2D9E7 /* MapView.swift in Sources */,
 				654A067F29E50FF800E2D9E7 /* ExplorerApp.swift in Sources */,

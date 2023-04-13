@@ -20,7 +20,6 @@ struct LookAroundView: UIViewControllerRepresentable {
         return vc
     }
     
-    
     func updateUIViewController(_ uiViewController: MKLookAroundViewController, context: Context) {
         let sceneRequest = MKLookAroundSceneRequest(coordinate: suggestedLocation.coordinate)
         sceneRequest.getSceneWithCompletionHandler {  scene, error in

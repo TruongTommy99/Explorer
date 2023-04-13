@@ -8,9 +8,26 @@
 import Foundation
 import SwiftUI
 
-enum MapViewConfigurationEnum: String,Equatable, CaseIterable {
-    case standard
-    case realistic
+enum MapType: String,Equatable, CaseIterable {
+    case Standard
+    case Image
+    case Hybrid
     
     var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
+
+enum MapElevation: String, Equatable, CaseIterable {
+    case Realistic
+    case Flat
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+}
+
+enum MapElevationStyle: String, Equatable, CaseIterable {
+    case Default
+    case Muted
+    var localizedName: LocalizedStringKey {
+        LocalizedStringKey(rawValue)
+    }
+}
+
+
