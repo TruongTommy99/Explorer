@@ -16,6 +16,7 @@
 		B215E94B29E791B000EFBDED /* SuggestedLocationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94A29E791B000EFBDED /* SuggestedLocationSample.swift */; };
 		B215E94D29E798FE00EFBDED /* InformationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94C29E798FE00EFBDED /* InformationSheet.swift */; };
 		B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */; };
+		B215E95229E8445000EFBDED /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95129E8445000EFBDED /* ViewModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B215E94A29E791B000EFBDED /* SuggestedLocationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedLocationSample.swift; sourceTree = "<group>"; };
 		B215E94C29E798FE00EFBDED /* InformationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSheet.swift; sourceTree = "<group>"; };
 		B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
+		B215E95129E8445000EFBDED /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		654A067D29E50FF800E2D9E7 /* Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				B215E95029E8443C00EFBDED /* Extension */,
 				654A068D29E5116400E2D9E7 /* Views */,
 				654A068C29E5115F00E2D9E7 /* Models */,
 				654A067E29E50FF800E2D9E7 /* ExplorerApp.swift */,
@@ -96,6 +99,14 @@
 				B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B215E95029E8443C00EFBDED /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B215E95129E8445000EFBDED /* ViewModifier.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +186,7 @@
 				654A068F29E5121A00E2D9E7 /* MapView.swift in Sources */,
 				654A067F29E50FF800E2D9E7 /* ExplorerApp.swift in Sources */,
 				654A069129E51DC200E2D9E7 /* SuggestLocations + Spot.swift in Sources */,
+				B215E95229E8445000EFBDED /* ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

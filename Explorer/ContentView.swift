@@ -13,7 +13,7 @@ struct ContentView: View {
         
     @State var currentSuggestedLocation: SuggestedLocation
     
-    @State var lookAroundInformation: Bool
+    @State var hasLookAroundScene: Bool
     
     var body: some View {
         NavigationSplitView {
@@ -37,15 +37,14 @@ struct ContentView: View {
                     MapView(currentLocation: self.$currentSuggestedLocation.coordinate)
                         .ignoresSafeArea()
                     
-                    Button("Get information"){
-                        self.toggleInformationSheet.toggle()
-                    }
                     VStack {
-                        Spacer()
-                        if lookAroundInformation == false {
-                            LookAroundView(suggestedLocation: self.$currentSuggestedLocation)
-                                .frame(width: 100,height: 100)
+                        Button("Get information"){
+                            self.toggleInformationSheet.toggle()
                         }
+                        LookAroundView(suggestedLocation: self.$currentSuggestedLocation, hasLookAroundScene: self.$hasLookAroundScene)
+                            .frame(width: 100,height: 100)
+                            .cornerRadius(8)
+                            .shadow(radius: 8)
                     }
                 }
             }
@@ -58,6 +57,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0], lookAroundInformation: false)
+        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0], hasLookAroundScene: false)
     }
 }

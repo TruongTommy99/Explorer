@@ -11,7 +11,7 @@ import SwiftUI
 struct ExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0],lookAroundInformation: false)
+            ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0],hasLookAroundScene: false)
         }
     }
 }

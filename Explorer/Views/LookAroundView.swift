@@ -13,22 +13,13 @@ import CoreLocation
 struct LookAroundView: UIViewControllerRepresentable {
     
     @Binding var suggestedLocation: SuggestedLocation
+    @Binding var hasLookAroundScene: Bool
         
     func makeUIViewController(context: Context) -> MKLookAroundViewController {
         
         let vc = MKLookAroundViewController()
-        let sceneRequest = MKLookAroundSceneRequest(coordinate: suggestedLocation.coordinate)
-        sceneRequest.getSceneWithCompletionHandler {  scene, error in
-            if let error {
-                print("NO SCENE")
-                print(error.localizedDescription)
-            }
-            else if let scene {
-                print("THERE IS A SCENE")
-                vc.scene = scene
-            }
-         }
-        
+        vc.pointOfInterestFilter = .includingAll
+
         return vc
     }
     
@@ -37,16 +28,14 @@ struct LookAroundView: UIViewControllerRepresentable {
         let sceneRequest = MKLookAroundSceneRequest(coordinate: suggestedLocation.coordinate)
         sceneRequest.getSceneWithCompletionHandler {  scene, error in
             if let error {
-                print("NO SCENE")
                 print(error.localizedDescription)
-                uiViewController.badgePosition = .topLeading
             }
             else if let scene {
-                print("THERE IS A SCENE")
                 uiViewController.scene = scene
+                hasLookAroundScene = true
             }
             else if scene == nil && error == nil {
-                print("WELP, nothing")
+                hasLookAroundScene = false
             }
          }
         

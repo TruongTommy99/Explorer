@@ -26,18 +26,5 @@ struct MapView: UIViewRepresentable {
                                                                                      longitude: self.currentLocation.longitude),
                                                  span: MKCoordinateSpan.init(latitudeDelta: 5, longitudeDelta: 5)),
                          animated: true)
-        self.searchLookAround(for: currentLocation)
-    }
-    
-   func searchLookAround(for location: CLLocationCoordinate2D){
-        let sceneRequest = MKLookAroundSceneRequest(coordinate: location)
-        
-        sceneRequest.getSceneWithCompletionHandler { scene, error in
-            if let error {
-                print(error)
-            }
-            else if let scene {
-            }
-        }
     }
 }
