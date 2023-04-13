@@ -7,13 +7,16 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 struct ContentView: View {
     @State private var toggleInformationSheet = false
-    
-    @State private var currentLocation: CLLocationCoordinate2D?
-    
+        
     @State var currentSuggestedLocation: SuggestedLocation
+    
+    @State var hasLookAroundScene: Bool
+    
+    @ObservedObject var mapConfigurations: MapConfigurations
     
     var body: some View {
         NavigationSplitView {
@@ -23,8 +26,7 @@ struct ContentView: View {
                         Text(place.name)
                         Spacer()
                         Button {
-                            self.currentLocation = place.coordinate
-                            print(self.currentLocation!)
+                            self.currentSuggestedLocation = place
                         } label: {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.blue)
@@ -34,24 +36,51 @@ struct ContentView: View {
             }
         } detail: {
             ZStack {
-                MapView(currentLocation: self.$currentLocation)
-                    .ignoresSafeArea()
-                
-                if let currentLocation {
+                if let currentSuggestedLocation {
+                    MapView(currentLocation: self.$currentSuggestedLocation.coordinate)
+                        .ignoresSafeArea()
+                        .environmentObject(mapConfigurations)
+                }
+            }
+            .overlay(alignment: .trailing) {
+                VStack {
                     Button("Get information"){
                         self.toggleInformationSheet.toggle()
                     }
+
+                    Button("Standard"){
+                        self.mapConfigurations.mapType = .Standard
+                    }
+                    Button("Hybrid"){
+                        self.mapConfigurations.mapType = .Hybrid
+                    }
+                    Button("Image"){
+                        self.mapConfigurations.mapType = .Image
+                    }
+                    Button("realistic"){
+                        self.mapConfigurations.mapElevation = .Realistic
+                    }
+                    Button("flat"){
+                        self.mapConfigurations.mapElevation = .Flat
+                    }
+                    
+                    Spacer()
+                    LookAroundView(suggestedLocation: self.$currentSuggestedLocation, hasLookAroundScene: self.$hasLookAroundScene)
+                        .frame(width: 125,height: 125)
+                        .cornerRadius(8)
+                        .shadow(radius: 8)
                 }
+                .padding()
             }
-            .sheet(isPresented: self.$toggleInformationSheet) {
-                InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
-            }
+        }
+        .sheet(isPresented: self.$toggleInformationSheet) {
+            InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0])
+        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0], hasLookAroundScene: false, mapConfigurations: MapConfigurations())
     }
 }

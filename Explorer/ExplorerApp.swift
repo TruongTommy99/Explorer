@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 @main
 struct ExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0])
+            ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0],hasLookAroundScene: false, mapConfigurations: MapConfigurations() )
         }
     }
 }
