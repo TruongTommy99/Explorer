@@ -8,9 +8,9 @@
 import Foundation
 import MapKit
 
-struct SuggestedLocations {
+struct SuggestedLocation {
     let name: String
-    let coordinate: Double
+    let coordinate: CLLocationCoordinate2D
     let spots: [Spot]
 }
 

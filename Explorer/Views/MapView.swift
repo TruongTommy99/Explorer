@@ -9,26 +9,16 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     
+    @Binding var currentLocation: CLLocationCoordinate2D?
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .none
-        let button = MKUserTrackingButton(mapView: mapView)
-        button.layer.backgroundColor = UIColor.white.cgColor
-        button.layer.cornerRadius = 5
-        button.translatesAutoresizingMaskIntoConstraints = false
-        mapView.addSubview(button)
-
-        NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -20),
-            button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -20)
-        ])
-
+        mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation?.latitude ?? 65.0, longitude: self.currentLocation?.longitude ?? 65.0), span: MKCoordinateSpan.init(latitudeDelta: 50, longitudeDelta: 50)), animated: true)
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        
+        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation?.latitude ?? 65.0, longitude: self.currentLocation?.longitude ?? 65.0), span: MKCoordinateSpan.init(latitudeDelta: 5, longitudeDelta: 5)), animated: true)
     }
     
 }
