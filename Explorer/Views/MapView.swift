@@ -10,6 +10,7 @@ import SwiftUI
 struct MapView: UIViewRepresentable {
     
     @Binding var currentLocation: CLLocationCoordinate2D
+    @Binding var mapConfiguration: MapViewConfigurationEnum
     
     var lookAroundScene: MKLookAroundScene?
     
@@ -24,7 +25,15 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.latitude,
                                                                                      longitude: self.currentLocation.longitude),
-                                                 span: MKCoordinateSpan.init(latitudeDelta: 5, longitudeDelta: 5)),
+                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.3, longitudeDelta: 0.3)),
                          animated: true)
+        switch mapConfiguration {
+        case .standard:
+            uiView.preferredConfiguration = MKStandardMapConfiguration(elevationStyle: .realistic)
+        case .realistic:
+            uiView.preferredConfiguration = MKImageryMapConfiguration(elevationStyle: .realistic)
+        }
     }
+    
 }
+

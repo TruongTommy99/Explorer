@@ -17,6 +17,7 @@
 		B215E94D29E798FE00EFBDED /* InformationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94C29E798FE00EFBDED /* InformationSheet.swift */; };
 		B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */; };
 		B215E95229E8445000EFBDED /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95129E8445000EFBDED /* ViewModifier.swift */; };
+		B215E95429E86DC600EFBDED /* MapViewConfigurationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95329E86DC600EFBDED /* MapViewConfigurationEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		B215E94C29E798FE00EFBDED /* InformationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSheet.swift; sourceTree = "<group>"; };
 		B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
 		B215E95129E8445000EFBDED /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
+		B215E95329E86DC600EFBDED /* MapViewConfigurationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewConfigurationEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				B215E95129E8445000EFBDED /* ViewModifier.swift */,
+				B215E95329E86DC600EFBDED /* MapViewConfigurationEnum.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */,
 				654A068129E50FF800E2D9E7 /* ContentView.swift in Sources */,
 				B215E94D29E798FE00EFBDED /* InformationSheet.swift in Sources */,
+				B215E95429E86DC600EFBDED /* MapViewConfigurationEnum.swift in Sources */,
 				654A068F29E5121A00E2D9E7 /* MapView.swift in Sources */,
 				654A067F29E50FF800E2D9E7 /* ExplorerApp.swift in Sources */,
 				654A069129E51DC200E2D9E7 /* SuggestLocations + Spot.swift in Sources */,

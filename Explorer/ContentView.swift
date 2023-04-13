@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 struct ContentView: View {
     @State private var toggleInformationSheet = false
@@ -14,6 +15,8 @@ struct ContentView: View {
     @State var currentSuggestedLocation: SuggestedLocation
     
     @State var hasLookAroundScene: Bool
+    
+    @State var currentMapViewConfiguration: MapViewConfigurationEnum
     
     var body: some View {
         NavigationSplitView {
@@ -32,20 +35,31 @@ struct ContentView: View {
                 }
             }
         } detail: {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 if let currentSuggestedLocation {
-                    MapView(currentLocation: self.$currentSuggestedLocation.coordinate)
+                    MapView(currentLocation: self.$currentSuggestedLocation.coordinate,
+                            mapConfiguration: self.$currentMapViewConfiguration)
                         .ignoresSafeArea()
                     
-                    VStack {
+                    VStack() {
                         Button("Get information"){
                             self.toggleInformationSheet.toggle()
                         }
+                        Spacer()
+                        Button("Realistic"){
+                            self.currentMapViewConfiguration = .realistic
+                        }
+                        Button("Standard"){
+                            self.currentMapViewConfiguration = .standard
+                        }
+                        .pickerStyle(.segmented)
                         LookAroundView(suggestedLocation: self.$currentSuggestedLocation, hasLookAroundScene: self.$hasLookAroundScene)
-                            .frame(width: 100,height: 100)
+                            .frame(width: 125,height: 125)
                             .cornerRadius(8)
                             .shadow(radius: 8)
+
                     }
+                    .padding()
                 }
             }
         }
@@ -57,6 +71,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0], hasLookAroundScene: false)
+        ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0], hasLookAroundScene: false, currentMapViewConfiguration: .realistic)
     }
 }

@@ -16,10 +16,7 @@ struct LookAroundView: UIViewControllerRepresentable {
     @Binding var hasLookAroundScene: Bool
         
     func makeUIViewController(context: Context) -> MKLookAroundViewController {
-        
         let vc = MKLookAroundViewController()
-        vc.pointOfInterestFilter = .includingAll
-
         return vc
     }
     
