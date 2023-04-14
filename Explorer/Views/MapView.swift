@@ -21,16 +21,16 @@ struct MapView: UIViewRepresentable {
                                                   span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)),
                           animated: true)
         mapView.camera.heading = .greatestFiniteMagnitude
+        mapView.selectableMapFeatures = [.physicalFeatures,.pointsOfInterest,.territories]
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.latitude,
                                                                                      longitude: self.currentLocation.longitude),
-                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.3, longitudeDelta: 0.3)),
+                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.1, longitudeDelta: 0.1)),
                          animated: true)
         updateMap(uiView)
-        
     }
     
     func updateMap(_ uiView: MKMapView){
@@ -44,6 +44,9 @@ struct MapView: UIViewRepresentable {
         }
     }
     
+}
+
+extension MapView {
     private func elevationStyle() -> MKStandardMapConfiguration.ElevationStyle{
         switch mapConfigurations.mapElevation {
         case .Realistic:
