@@ -32,15 +32,6 @@ struct MapView: UIViewRepresentable {
                                                  span: MKCoordinateSpan.init(latitudeDelta: 0.1, longitudeDelta: 0.1)),
                          animated: true)
         updateMap(uiView)
-        Task(priority: .high) {
-            do {
-                let weather = try await WeatherService.shared.weather(for: CLLocation(latitude: self.currentLocation.latitude, longitude: self.currentLocation.longitude))
-                print(weather.currentWeather)
-            }
-            catch{
-                print(error.localizedDescription)
-            }
-        }
     }
     
     func updateMap(_ uiView: MKMapView){

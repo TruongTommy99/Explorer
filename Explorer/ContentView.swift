@@ -92,6 +92,9 @@ struct ContentView: View {
         .sheet(isPresented: self.$toggleInformationSheet) {
             InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
         }
+        .sheet(isPresented: self.$toggleConfigurationSheet) {
+            MapConfigurationsView()
+        }
         
     }
 }

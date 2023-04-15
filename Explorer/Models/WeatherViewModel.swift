@@ -16,7 +16,7 @@ class WeatherViewModel: ObservableObject {
     var service = WeatherService.shared
     
     func getWeather(for location: CLLocation){
-        Task(priority: .high) {
+        Task(priority: .high) { @MainActor in
             do  {
                 let weather = try await service.weather(for: location)
                 self.data = weather

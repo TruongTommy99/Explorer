@@ -6,16 +6,36 @@
 //
 
 import SwiftUI
+import CoreLocation
+import Charts
 
 struct InformationSheet: View {
     var currentSuggestedLocation: SuggestedLocation
+    
+    @StateObject var weatherViewModel = WeatherViewModel()
+    
     var body: some View {
         VStack {
             Text(currentSuggestedLocation.name)
                 .bold()
                 .font(.largeTitle)
-            Text(currentSuggestedLocation.coordinate.longitude.description)
-            Text(currentSuggestedLocation.coordinate.latitude.description)
+            if let data = weatherViewModel.data {
+
+                Text(data.currentWeather.date.description)
+                Text(data.currentWeather.temperature.formatted())
+                Text(data.minuteForecast?.summary ?? "")
+                Text(data.hourlyForecast.forecast.description)
+                Text(data.dailyForecast.forecast.description)
+
+//                Chart(data)
+            }
+            else {
+                Text("There is currently no available information about this location")
+            }
+
+        }
+        .onAppear {
+            weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
         }
     }
 }
