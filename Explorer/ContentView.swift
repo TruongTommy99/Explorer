@@ -66,30 +66,10 @@ struct ContentView: View {
                                     .resizable()
                                     .aspectRatio(1,contentMode: .fit)
                                     .opacity(0.5)
-                                .frame(width: 30)
+                                .frame(width: 25)
                             }
                             .frame(width: 45, height: 45)
                         }
-//
-//                        Button("Standard"){
-//                            self.mapConfigurations.mapType = .Standard
-//                        }
-//                        Divider()
-//                            .frame(width: 45, height: 0)
-//                        Button("Hybrid"){
-//                            self.mapConfigurations.mapType = .Hybrid
-//                        }
-//                        Divider()
-//                            .frame(width: 45, height: 0)
-//                        Button("Image"){
-//                            self.mapConfigurations.mapType = .Image
-//                        }
-//                        Button("realistic"){
-//                            self.mapConfigurations.mapElevation = .Realistic
-//                        }
-//                        Button("flat"){
-//                            self.mapConfigurations.mapElevation = .Flat
-//                        }
                     }
                     .background(
                         VisualEffectView(.systemThickMaterial)
