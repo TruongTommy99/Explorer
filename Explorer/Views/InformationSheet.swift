@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InformationSheet: View {
-    @State var currentSuggestedLocation: SuggestedLocation
+    var currentSuggestedLocation: SuggestedLocation
     var body: some View {
         VStack {
             Text(currentSuggestedLocation.name)

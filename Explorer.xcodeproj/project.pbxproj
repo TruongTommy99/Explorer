@@ -22,6 +22,7 @@
 		B215E95829E9E08800EFBDED /* MapConfigurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B215E95729E9E08800EFBDED /* MapConfigurationsView.swift */; };
 		B294A88229E8801A00821D26 /* ContentView + MapConfigurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294A88129E8801A00821D26 /* ContentView + MapConfigurationPicker.swift */; };
 		B294A88729E8851900821D26 /* MapConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294A88629E8851900821D26 /* MapConfigurations.swift */; };
+		B294A88929EA417D00821D26 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B294A88829EA417D00821D26 /* WeatherViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		B215E95729E9E08800EFBDED /* MapConfigurationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConfigurationsView.swift; sourceTree = "<group>"; };
 		B294A88129E8801A00821D26 /* ContentView + MapConfigurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView + MapConfigurationPicker.swift"; sourceTree = "<group>"; };
 		B294A88629E8851900821D26 /* MapConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConfigurations.swift; sourceTree = "<group>"; };
+		B294A88829EA417D00821D26 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				654A069029E51DC200E2D9E7 /* SuggestLocations + Spot.swift */,
 				B215E94A29E791B000EFBDED /* SuggestedLocationSample.swift */,
 				B294A88629E8851900821D26 /* MapConfigurations.swift */,
+				B294A88829EA417D00821D26 /* WeatherViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				B215E94B29E791B000EFBDED /* SuggestedLocationSample.swift in Sources */,
 				B215E94F29E7C3AD00EFBDED /* LookAroundView.swift in Sources */,
 				654A068129E50FF800E2D9E7 /* ContentView.swift in Sources */,
+				B294A88929EA417D00821D26 /* WeatherViewModel.swift in Sources */,
 				B294A88729E8851900821D26 /* MapConfigurations.swift in Sources */,
 				B215E94D29E798FE00EFBDED /* InformationSheet.swift in Sources */,
 				B215E95629E9D96A00EFBDED /* VisualEffectView.swift in Sources */,
@@ -349,7 +353,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tommy.Explorer;
+				PRODUCT_BUNDLE_IDENTIFIER = tommy.ExplorerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
