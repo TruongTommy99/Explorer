@@ -33,6 +33,7 @@
 		654A068529E50FF900E2D9E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		654A068E29E5121A00E2D9E7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		654A069029E51DC200E2D9E7 /* SuggestLocations + Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestLocations + Spot.swift"; sourceTree = "<group>"; };
+		65C594D729EA48CD0077A506 /* Explorer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explorer.entitlements; sourceTree = "<group>"; };
 		B215E94A29E791B000EFBDED /* SuggestedLocationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedLocationSample.swift; sourceTree = "<group>"; };
 		B215E94C29E798FE00EFBDED /* InformationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSheet.swift; sourceTree = "<group>"; };
 		B215E94E29E7C3AD00EFBDED /* LookAroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		654A067D29E50FF800E2D9E7 /* Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				65C594D729EA48CD0077A506 /* Explorer.entitlements */,
 				B215E95029E8443C00EFBDED /* Extension */,
 				654A068D29E5116400E2D9E7 /* Views */,
 				654A068C29E5115F00E2D9E7 /* Models */,
@@ -336,10 +338,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Explorer/Explorer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Explorer/Preview Content\"";
-				DEVELOPMENT_TEAM = 4U4F77M4FT;
+				DEVELOPMENT_TEAM = 44N856UZ6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
@@ -369,10 +372,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Explorer/Explorer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Explorer/Preview Content\"";
-				DEVELOPMENT_TEAM = 4U4F77M4FT;
+				DEVELOPMENT_TEAM = 44N856UZ6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";

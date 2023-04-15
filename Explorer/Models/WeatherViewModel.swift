@@ -19,7 +19,7 @@ class WeatherViewModel: ObservableObject {
         Task(priority: .high) {
             do  {
                 let weather = try await service.weather(for: location)
-//                self.data = weather
+                self.data = weather
                 print(weather.currentWeather)
             }
             catch {

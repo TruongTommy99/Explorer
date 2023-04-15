@@ -38,7 +38,7 @@ struct MapView: UIViewRepresentable {
                 print(weather.currentWeather)
             }
             catch{
-                
+                print(error.localizedDescription)
             }
         }
     }
