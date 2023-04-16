@@ -18,18 +18,19 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 65.0, longitude: 50.0),
-                                                  span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)),
+        mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 90, longitude: 90),
+                                                  span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)),
                           animated: true)
         mapView.camera.heading = .greatestFiniteMagnitude
         mapView.selectableMapFeatures = [.physicalFeatures,.pointsOfInterest,.territories]
+        mapView.mapType = .satelliteFlyover
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.latitude,
                                                                                      longitude: self.currentLocation.longitude),
-                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.1, longitudeDelta: 0.1)),
+                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),
                          animated: true)
         updateMap(uiView)
     }

@@ -8,20 +8,28 @@
 import SwiftUI
 
 struct MapConfigurationsView: View {
-    @EnvironmentObject var mapConfiguration: MapConfigurations
+    @ObservedObject var mapConfiguration: MapConfigurations
         
     var body: some View {
         VStack {
-            Button("Map: standard") {
-                mapConfiguration.mapType = .Standard
+            Picker("Map type",selection: $mapConfiguration.mapType){
+                Text("Standard").tag(MapType.Standard)
+                Text("Image").tag(MapType.Image)
+                Text("Hybrid").tag(MapType.Hybrid)
             }
-            Button("Map: image") {
-                mapConfiguration.mapType = .Image
+            
+            Picker("Elevation",selection: $mapConfiguration.mapElevation){
+                Text("Realistic").tag(MapElevation.Realistic)
+                Text("Flat").tag(MapElevation.Flat)
             }
-            Button("Map: hybrid") {
-                mapConfiguration.mapType = .Hybrid
+            
+            Picker("Elevation Style",selection: $mapConfiguration.mapEmphasis){
+                Text("Default").tag(MapElevationStyle.Default)
+                Text("Muted").tag(MapElevationStyle.Muted)
             }
         }
+        .pickerStyle(.segmented)
+        .padding()
     }
 }
 

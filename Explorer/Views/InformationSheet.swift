@@ -14,34 +14,36 @@ struct InformationSheet: View {
     
     @StateObject var weatherViewModel = WeatherViewModel()
     
+    let now = Date.now
+    
     var body: some View {
-        VStack {
-            Text(currentSuggestedLocation.name)
-                .bold()
-                .font(.largeTitle)
-            if let data = weatherViewModel.data {
+        ScrollView {
+            VStack {
+                Text(currentSuggestedLocation.name)
+                    .bold()
+                    .font(.largeTitle)
+                if let data = weatherViewModel.data {
+                    if now < data.currentWeather.date {
+                        Text(data.currentWeather.date.formatted())
+                        Text("You are currently behind by \(Calendar.current.dateComponents([.hour], from: now, to: data.currentWeather.date))")
+                    }
+                    else {
+                        Text(data.currentWeather.date.formatted())
+                        Text("You are currently ahead by \(Calendar.current.dateComponents([.hour], from: now, to: data.currentWeather.date))")
 
-                Text(data.currentWeather.date.description)
-                Text(data.currentWeather.temperature.formatted())
-                Text(data.minuteForecast?.summary ?? "")
-                ForEach(data.hourlyForecast,id:\.date){ hourlyForcast in
-                    
-                    HStack {
-                        Text(hourlyForcast.date.ISO8601Format())
-                        Text(hourlyForcast.temperature.description)
                     }
                 }
-                Text(data.dailyForecast.forecast.description)
+                
+                else {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                }
 
-//                Chart(data)
             }
-            else {
-                Text("There is currently no available information about this location")
-            }
-
+            .onAppear {
+                weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
+                
         }
-        .onAppear {
-            weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
         }
     }
 }
@@ -51,3 +53,4 @@ struct InformationSheet_Previews: PreviewProvider {
         InformationSheet(currentSuggestedLocation: SuggestedLocation.sampleLocations[0])
     }
 }
+
