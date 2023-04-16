@@ -17,6 +17,7 @@ struct LookAroundView: UIViewControllerRepresentable {
         
     func makeUIViewController(context: Context) -> MKLookAroundViewController {
         let vc = MKLookAroundViewController()
+        
         return vc
     }
     
