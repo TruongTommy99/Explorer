@@ -59,7 +59,7 @@ struct ContentView: View {
                         }
                         Divider()
                         Button {
-                            self.mapConfigurations.mapType = .Hybrid
+                            self.toggleConfigurationSheet.toggle()
                         } label: {
                             Group {
                                 Image(systemName: "map.fill")
@@ -94,6 +94,8 @@ struct ContentView: View {
         }
         .sheet(isPresented: self.$toggleConfigurationSheet) {
             MapConfigurationsView()
+                .environmentObject(mapConfigurations)
+                .presentationDetents([.height(200),.fraction(0.5)])
         }
         
     }

@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct MapConfigurationsView: View {
-    @EnvironmentObject var mapConfigurations: MapConfigurations
+    @EnvironmentObject var mapConfiguration: MapConfigurations
         
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Button("Map: standard") {
+                mapConfiguration.mapType = .Standard
+            }
+            Button("Map: image") {
+                mapConfiguration.mapType = .Image
+            }
+            Button("Map: hybrid") {
+                mapConfiguration.mapType = .Hybrid
+            }
         }
     }
 }
 
-struct MapConfigurationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapConfigurationsView()
-    }
-}
+//struct MapConfigurationsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapConfigurationsView(mapConfigurations: .constant(.init()))
+//    }
+//}

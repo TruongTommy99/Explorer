@@ -24,7 +24,13 @@ struct InformationSheet: View {
                 Text(data.currentWeather.date.description)
                 Text(data.currentWeather.temperature.formatted())
                 Text(data.minuteForecast?.summary ?? "")
-                Text(data.hourlyForecast.forecast.description)
+                ForEach(data.hourlyForecast,id:\.date){ hourlyForcast in
+                    
+                    HStack {
+                        Text(hourlyForcast.date.ISO8601Format())
+                        Text(hourlyForcast.temperature.description)
+                    }
+                }
                 Text(data.dailyForecast.forecast.description)
 
 //                Chart(data)
