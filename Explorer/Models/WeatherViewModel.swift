@@ -25,7 +25,12 @@ class WeatherViewModel: ObservableObject {
                 let weather = try await service.weather(for: location)
                 self.data = weather
                 // HOURLY FORECAST
-                self.hourlyForecast = weather.hourlyForecast.forecast
+                for i in 0..<60 {
+                    if i.isMultiple(of: 3){
+                        self.hourlyForecast.append(weather.hourlyForecast.forecast[i])
+                    }
+                }
+                self.tenDayForecast = weather.dailyForecast.forecast
                 print(weather.currentWeather)
             }
             catch {

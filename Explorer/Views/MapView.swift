@@ -23,7 +23,6 @@ struct MapView: UIViewRepresentable {
                           animated: true)
         mapView.camera.heading = .greatestFiniteMagnitude
         mapView.selectableMapFeatures = [.physicalFeatures,.pointsOfInterest,.territories]
-        mapView.mapType = .satelliteFlyover
         return mapView
     }
     
