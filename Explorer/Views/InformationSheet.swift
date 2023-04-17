@@ -10,40 +10,49 @@ import CoreLocation
 import Charts
 
 struct InformationSheet: View {
-    var currentSuggestedLocation: SuggestedLocation
+    @State var currentSuggestedLocation: SuggestedLocation
     
     @StateObject var weatherViewModel = WeatherViewModel()
     
-    let now = Date.now
-    
     var body: some View {
-        ScrollView {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.blue,.blue,.orange]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             VStack {
                 Text(currentSuggestedLocation.name)
-                    .bold()
                     .font(.largeTitle)
                 if let data = weatherViewModel.data {
-                    if now < data.currentWeather.date {
-                        Text(data.currentWeather.date.formatted())
-                        Text("You are currently behind by \(Calendar.current.dateComponents([.hour], from: now, to: data.currentWeather.date))")
-                    }
-                    else {
-                        Text(data.currentWeather.date.formatted())
-                        Text("You are currently ahead by \(Calendar.current.dateComponents([.hour], from: now, to: data.currentWeather.date))")
-
+                    
+                    Text(data.currentWeather.temperature.formatted())
+                        .font(.title2)
+                    Text(data.currentWeather.condition.description)
+                    
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(weatherViewModel.hourlyForecast,id :\.date) { forecast in
+                                VStack {
+                                    Text(forecast.date.formatted(date: .omitted, time: .omitted))
+                                        .bold()
+                                    Image(systemName: "\(forecast.symbolName).fill")
+                                        .font(.title2)
+                                        .symbolRenderingMode(.multicolor)
+                                    Text(forecast.temperature.formatted())
+                                        .fontWeight(.semibold)
+                                }
+                            }
+                        }
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
+                        .padding()
                     }
                 }
-                
                 else {
                     ProgressView()
-                        .progressViewStyle(.circular)
                 }
 
             }
             .onAppear {
                 weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
-                
-        }
+            }
         }
     }
 }
@@ -53,4 +62,3 @@ struct InformationSheet_Previews: PreviewProvider {
         InformationSheet(currentSuggestedLocation: SuggestedLocation.sampleLocations[0])
     }
 }
-
