@@ -22,7 +22,7 @@ struct InformationSheet: View {
                 Text(currentSuggestedLocation.name)
                     .font(.largeTitle)
                 if let data = weatherViewModel.data {
-                    //General Information
+
                     Text(data.currentWeather.temperature.formatted())
                         .font(.title2)
                     Text(data.currentWeather.condition.description)
@@ -51,6 +51,22 @@ struct InformationSheet: View {
                                 }
                             }
                         }
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(weatherViewModel.hourlyForecast,id :\.date) { forecast in
+                                VStack {
+                                    Text(forecast.date.formatted(date: .omitted, time: .omitted))
+                                        .bold()
+                                    Image(systemName: "\(forecast.symbolName).fill")
+                                        .font(.title2)
+                                        .symbolRenderingMode(.multicolor)
+                                    Text(forecast.temperature.formatted())
+                                        .fontWeight(.semibold)
+                                }
+                            }
+                        }
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
+                        .padding()
                     }
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
                     .padding(6)

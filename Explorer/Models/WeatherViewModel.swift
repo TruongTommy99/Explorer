@@ -31,6 +31,7 @@ class WeatherViewModel: ObservableObject {
                     }
                 }
                 self.tenDayForecast = weather.dailyForecast.forecast
+                self.hourlyForecast = weather.hourlyForecast.forecast
                 print(weather.currentWeather)
             }
             catch {
