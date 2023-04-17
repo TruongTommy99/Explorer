@@ -10,7 +10,7 @@ import WeatherKit
 
 struct MapView: UIViewRepresentable {
     
-    @Binding var currentLocation: CLLocationCoordinate2D
+    @Binding var currentLocation: SuggestedLocation
     
     @EnvironmentObject private var mapConfigurations: MapConfigurations
     
@@ -23,14 +23,30 @@ struct MapView: UIViewRepresentable {
                           animated: true)
         mapView.camera.heading = .greatestFiniteMagnitude
         mapView.selectableMapFeatures = [.physicalFeatures,.pointsOfInterest,.territories]
+        // ADD annotations
+        var listAnnotations = [MKPointAnnotation]()
+        for i in 0 ..< SuggestedLocation.sampleLocations.count {
+            let annotation = MKPointAnnotation()
+            annotation.title = SuggestedLocation.sampleLocations[i].name
+            annotation.coordinate = SuggestedLocation.sampleLocations[i].coordinate
+            listAnnotations.append(annotation)
+        }
+        mapView.addAnnotations(listAnnotations)
+        
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.latitude,
-                                                                                     longitude: self.currentLocation.longitude),
+        if currentLocation == SuggestedLocation.initialGlobe {
+            uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 90, longitude: 90),
+                                                      span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)),
+                              animated: true)
+        }
+        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.coordinate.latitude,
+                                                                                     longitude: self.currentLocation.coordinate.longitude),
                                                  span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),
                          animated: true)
+                    
         updateMap(uiView)
     }
     
