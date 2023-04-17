@@ -21,29 +21,43 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            Group {
-                List(SuggestedLocation.sampleLocations,id:\.name) { place in
-                    HStack {
-                        Text(place.name)
-                        Spacer()
+                List(SuggestedLocation.sampleLocations, id:\.name) { place in
                         Button {
-                            self.currentSuggestedLocation = place
+                            withAnimation(.default){
+                                self.currentSuggestedLocation = place
+                            }
                         } label: {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.blue)
+                            HStack {
+                                Text(place.name)
+                                Spacer()
+                                Text(place.flag)
+                            }
+                        }
+                    .listRowBackground(self.currentSuggestedLocation == place ? Color.blue.cornerRadius(8) : Color.white.cornerRadius(0))
+                }
+                .navigationTitle("Locations")
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Surprise me!"){
+                            self.currentSuggestedLocation = SuggestedLocation.sampleLocations.randomElement()!
                         }
                     }
                 }
-            }
         } detail: {
             ZStack {
-                MapView(currentLocation: self.$currentSuggestedLocation.coordinate)
+                MapView(currentLocation: self.$currentSuggestedLocation)
                     .ignoresSafeArea()
                     .environmentObject(mapConfigurations)
             }
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Go back to world"){
+                        self.currentSuggestedLocation = SuggestedLocation.initialGlobe
+                    }
+                }
+            })
             .overlay(alignment: .trailing) {
                 VStack {
-                    
                     VStack(spacing:0)  {
                         Button {
                             self.toggleInformationSheet.toggle()
@@ -61,6 +75,7 @@ struct ContentView: View {
                         Button {
                             self.toggleConfigurationSheet.toggle()
                         } label: {
+                            
                             Group {
                                 Image(systemName: "map.fill")
                                     .resizable()

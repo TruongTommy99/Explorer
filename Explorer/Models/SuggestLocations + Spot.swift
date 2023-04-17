@@ -10,12 +10,17 @@ import MapKit
 
 struct SuggestedLocation {
     let name: String
+    let flag: String
     var coordinate: CLLocationCoordinate2D
-    let spots: [Spot]
 }
 
-struct Spot {
-    let title:String
-    let longitude: Double
-    let latitute: Double
+extension SuggestedLocation: Hashable {
+    static func == (lhs: SuggestedLocation, rhs: SuggestedLocation) -> Bool {
+        lhs.name == rhs.name
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
 }
+
+

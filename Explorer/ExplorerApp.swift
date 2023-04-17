@@ -12,7 +12,7 @@ import MapKit
 struct ExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(currentSuggestedLocation: SuggestedLocation.sampleLocations[0],hasLookAroundScene: false, mapConfigurations: MapConfigurations() )
+            ContentView(currentSuggestedLocation: SuggestedLocation.initialGlobe,hasLookAroundScene: false, mapConfigurations: MapConfigurations() )
         }
     }
 }
