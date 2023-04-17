@@ -13,6 +13,10 @@ class WeatherViewModel: ObservableObject {
     
     @Published var data: Weather?
     
+    @Published var hourlyForecast = [HourWeather]()
+    
+    @Published var tenDayForecast = [DayWeather]()
+    
     var service = WeatherService.shared
     
     func getWeather(for location: CLLocation){
@@ -20,6 +24,8 @@ class WeatherViewModel: ObservableObject {
             do  {
                 let weather = try await service.weather(for: location)
                 self.data = weather
+                // HOURLY FORECAST
+                self.hourlyForecast = weather.hourlyForecast.forecast
                 print(weather.currentWeather)
             }
             catch {
