@@ -50,27 +50,10 @@ struct InformationSheet: View {
                                 }
                             }
                         }
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(weatherViewModel.hourlyForecast,id :\.date) { forecast in
-                                    VStack {
-                                        Text(forecast.date.formatted(date: .omitted, time: .omitted))
-                                            .bold()
-                                        Image(systemName: "\(forecast.symbolName).fill")
-                                            .font(.title2)
-                                            .symbolRenderingMode(.multicolor)
-                                        Text(forecast.temperature.formatted())
-                                            .fontWeight(.semibold)
-                                    }
-                                }
-                            }
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
-                            .padding()
-                        }
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
-                        .padding(6)
                         // Weekly Forecast
                     }
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
+                    .padding(6)
                 }
                 else {
                     ProgressView()
