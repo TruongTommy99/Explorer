@@ -93,9 +93,8 @@ struct ContentView: View {
             InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
         }
         .sheet(isPresented: self.$toggleConfigurationSheet) {
-            MapConfigurationsView()
+            MapConfigurationsView(mapConfiguration: mapConfigurations)
                 .environmentObject(mapConfigurations)
-                .presentationDetents([.height(200),.fraction(0.5)])
         }
         
     }
