@@ -51,9 +51,26 @@ struct ContentView: View {
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Go back to world"){
-                        self.currentSuggestedLocation = SuggestedLocation.initialGlobe
+                    VStack {
+                        Button {
+                            self.currentSuggestedLocation = SuggestedLocation.initialGlobe
+                        } label: {
+                            Group {
+                                Image(systemName: "arrowshape.backward.fill")
+                                    .resizable()
+                                    .aspectRatio(1,contentMode: .fit)
+                                    .opacity(0.5)
+                                .frame(width: 25)
+                            }
+                            .frame(width: 45, height: 45)
+                        }
                     }
+                    .background(
+                        VisualEffectView(.systemThickMaterial)
+                            .cornerRadius(10)
+                            .shadow(radius: 8)
+                    )
+                    .frame(width: 45)
                 }
             })
             .overlay(alignment: .trailing) {
@@ -75,7 +92,6 @@ struct ContentView: View {
                         Button {
                             self.toggleConfigurationSheet.toggle()
                         } label: {
-                            
                             Group {
                                 Image(systemName: "map.fill")
                                     .resizable()
@@ -95,11 +111,13 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    LookAroundView(suggestedLocation: self.$currentSuggestedLocation, hasLookAroundScene: self.$hasLookAroundScene)
-                        .frame(width: 150,height: 150)
-                        .cornerRadius(8)
-                        .shadow(radius: 8)
-                        .padding(.trailing,10)
+                    if self.currentSuggestedLocation != SuggestedLocation.initialGlobe {
+                        LookAroundView(suggestedLocation: self.$currentSuggestedLocation, hasLookAroundScene: self.$hasLookAroundScene)
+                            .frame(width: 150,height: 150)
+                            .cornerRadius(8)
+                            .shadow(radius: 8)
+                            .padding(.trailing,10)
+                    }
                 }
                 .padding()
             }

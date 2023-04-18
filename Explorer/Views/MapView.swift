@@ -6,18 +6,16 @@
 //
 import MapKit
 import SwiftUI
-import WeatherKit
 
 struct MapView: UIViewRepresentable {
     
     @Binding var currentLocation: SuggestedLocation
     
     @EnvironmentObject private var mapConfigurations: MapConfigurations
-    
-    var lookAroundScene: MKLookAroundScene?
-    
+            
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
+        mapView.delegate = context.coordinator
         mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 90, longitude: 90),
                                                   span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)),
                           animated: true)
@@ -37,16 +35,15 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.coordinate.latitude,
+                                                                                     longitude: self.currentLocation.coordinate.longitude),
+                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),
+                         animated: true)
         if currentLocation == SuggestedLocation.initialGlobe {
             uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: 90, longitude: 90),
                                                       span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)),
                               animated: true)
         }
-        uiView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: self.currentLocation.coordinate.latitude,
-                                                                                     longitude: self.currentLocation.coordinate.longitude),
-                                                 span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),
-                         animated: true)
-                    
         updateMap(uiView)
     }
     
@@ -61,8 +58,39 @@ struct MapView: UIViewRepresentable {
         }
     }
     
+    func makeCoordinator() -> MapViewCoordinator {
+        MapViewCoordinator(self,currentLocation)
+    }
+    
+    public class MapViewCoordinator: NSObject, MKMapViewDelegate {
+        var mapView: MapView
+        var currentLocation: SuggestedLocation
+                
+        init(_ control: MapView,_ current: SuggestedLocation) {
+            self.mapView = control
+            self.currentLocation = current
+        }
+
+        public func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+            mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: annotation.coordinate.latitude,
+                                                                                          longitude: annotation.coordinate.longitude),
+                                                     span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),animated: true)
+        }
+        
+        public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            mapView.setRegion(MKCoordinateRegion.init(center: CLLocationCoordinate2D.init(latitude: view.annotation!.coordinate.latitude,
+                                                                                          longitude: view.annotation!.coordinate.longitude),
+                                                     span: MKCoordinateSpan.init(latitudeDelta: 0.04, longitudeDelta: 0.04)),animated: true)
+            for i in 0 ..< SuggestedLocation.sampleLocations.count {
+                if SuggestedLocation.sampleLocations[i].coordinate.latitude == view.annotation?.coordinate.latitude {
+                    self.mapView.currentLocation = SuggestedLocation.sampleLocations[i]
+                }
+            }
+        }
+    }
 }
 
+// HELPER FUNCTIONS
 extension MapView {
     private func elevationStyle() -> MKStandardMapConfiguration.ElevationStyle{
         switch mapConfigurations.mapElevation {
@@ -81,5 +109,9 @@ extension MapView {
             return MKStandardMapConfiguration.EmphasisStyle.muted
         }
     }
+}
+
+extension MapView {
+
 }
 
