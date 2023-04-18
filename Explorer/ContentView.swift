@@ -60,12 +60,13 @@ struct ContentView: View {
                                     .resizable()
                                     .aspectRatio(1,contentMode: .fit)
                                     .opacity(0.5)
-                                .frame(width: 25)
+                                .frame(width: 35)
                             }
                             .frame(width: 45, height: 45)
                         }
                     }
                     .background(
+                        
                         VisualEffectView(.systemThickMaterial)
                             .cornerRadius(10)
                             .shadow(radius: 8)

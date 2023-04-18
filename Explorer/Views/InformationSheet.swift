@@ -12,10 +12,10 @@ import WebKit
 struct InformationSheet: View {
     @State var currentSuggestedLocation: SuggestedLocation
     
+    
     @StateObject var weatherViewModel = WeatherViewModel()
     
-    @State private var showWebView = false
-    private let urlString = "https://www.google.com/search?q=flights+to+" 
+    private let urlString = "https://www.google.com/search?q=flights+to+"
     
     var body: some View {
         ZStack {
@@ -24,10 +24,13 @@ struct InformationSheet: View {
             VStack {
                 Text(currentSuggestedLocation.name)
                     .font(.largeTitle)
+                    .foregroundColor(.white)
                 if let data = weatherViewModel.data {
                     Text(data.currentWeather.temperature.formatted())
                         .font(.title2)
+                        .foregroundColor(.white)
                     Text(data.currentWeather.condition.description)
+                        .foregroundColor(.white)
                     
                     // Daily Forecast
                     VStack(alignment: .leading) {
@@ -55,30 +58,21 @@ struct InformationSheet: View {
                         }
                         // Weekly Forecast
                     }
+                    .foregroundColor(.white)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
                     .padding(6)
-                    
                     NavigationLink("See more information") {
-                        DetailedInformationSheet()
+                            DetailedInformationSheet()
                     }
-                    
-                    Button("Look for a flight") {
-                        self.showWebView.toggle()
-                    }
-                    
-                    Link("Go to ", destination: URL(string: "https://www.google.com/search?q=" + currentSuggestedLocation.flag)!)
+                    Link("Go to ", destination: URL(string: (urlString + currentSuggestedLocation.name.replacingOccurrences(of: " ", with: "+")).trimmingCharacters(in: .whitespaces))!)
                 }
                 else {
                     ProgressView()
                     }
                 }
-            .foregroundColor(.white)
         }
         .onAppear {
             weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
-        }
-        .sheet(isPresented: self.$showWebView) {
-            WebView(url: URL(string: urlString)!)
         }
     }
 }
@@ -89,16 +83,3 @@ struct InformationSheet_Previews: PreviewProvider {
     }
 }
 
-struct WebView: UIViewRepresentable {
-    var url: URL
-    
-    func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        return webView
-    }
-    
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        let urlRequest = URLRequest(url: url)
-        uiView.load(urlRequest)
-    }
-}
