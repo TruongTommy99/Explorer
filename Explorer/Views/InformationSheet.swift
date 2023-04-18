@@ -12,67 +12,80 @@ import WebKit
 struct InformationSheet: View {
     @State var currentSuggestedLocation: SuggestedLocation
     
-    
     @StateObject var weatherViewModel = WeatherViewModel()
     
     private let urlString = "https://www.google.com/search?q=flights+to+"
+    @State var currentTime: TimeZone? = TimeZone(identifier: "") ?? nil
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue,.blue,.cyan]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            VStack {
-                Text(currentSuggestedLocation.name)
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                if let data = weatherViewModel.data {
-                    Text(data.currentWeather.temperature.formatted())
-                        .font(.title2)
-                        .foregroundColor(.white)
-                    Text(data.currentWeather.condition.description)
-                        .foregroundColor(.white)
-                    
-                    // Daily Forecast
-                    VStack(alignment: .leading) {
-                        Label("Hourly Forecast", systemImage: "clock")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(8)
-                        Divider()
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(weatherViewModel.hourlyForecast,id :\.date) { forecast in
-                                    VStack() {
-                                        Text( (forecast == weatherViewModel.hourlyForecast[0]) ? "Now" : DateFormatter.localizedString(from: forecast.date, dateStyle: .none, timeStyle: .short))
-                                            .font(.caption)
-                                        Image(systemName: "\(forecast.symbolName)")
-                                            .scaledToFit()
-                                            .symbolRenderingMode(.monochrome)
-                                            .frame(height: 40)
-                                        Text(forecast.temperature.formatted())
-                                            .fontWeight(.medium)
-                                    }
-                                    .padding(6)
-                                }
-                            }
-                        }
-                        // Weekly Forecast
-                    }
-                    .foregroundColor(.white)
-                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8,style: .circular))
-                    .padding(6)
-                    NavigationLink("See more information") {
-                            DetailedInformationSheet()
-                    }
-                    Link("Go to ", destination: URL(string: (urlString + currentSuggestedLocation.name.replacingOccurrences(of: " ", with: "+")).trimmingCharacters(in: .whitespaces))!)
+        NavigationStack{
+            VStack(alignment: .leading){
+                HStack {
+                    Spacer()
+                    Text("Informations")
+                        .bold()
+                        .font(.largeTitle)
+                    Spacer()
                 }
-                else {
-                    ProgressView()
+                // Weather screen
+                HStack {
+                    if weatherViewModel.data != nil {
+                        WeatherDailyView(currentSuggestedLocation: currentSuggestedLocation)
+                            .environmentObject(weatherViewModel)
+                            .frame(height: 500)
+                            .cornerRadius(12)
+                            .shadow(radius: 6)
+                        WeatherWeeklyView(currentSuggestedLocation: currentSuggestedLocation)
+                            .environmentObject(weatherViewModel)
+                            .frame(height: 500)
+                            .cornerRadius(12)
+                            .shadow(radius: 6)
+                    }
+                    else {
+                        Spacer()
+                        ProgressView("Fetching data")
+                        Spacer()
                     }
                 }
+            
+                NavigationLink("More Information →") {
+                    DetailedInformationSheet(suggestedLocation: currentSuggestedLocation)
+                        .environmentObject(weatherViewModel)
+                }
+                    .padding()
+                
+                Link("Want to visit this location? Book a flight now!", destination: URL(string: (urlString + currentSuggestedLocation.name.replacingOccurrences(of: " ", with: "+")).trimmingCharacters(in: .whitespaces))!)
+                    .padding()
+            }
         }
         .onAppear {
             weatherViewModel.getWeather(for: CLLocation(latitude: currentSuggestedLocation.coordinate.latitude, longitude: currentSuggestedLocation.coordinate.longitude))
+            self.getTimeZone(location: currentSuggestedLocation.coordinate) { TimeZone in
+                self.currentTime = TimeZone
+                print(TimeZone.description)
+            }
+        }
+        .onChange(of: currentSuggestedLocation) { newValue in
+            weatherViewModel.getWeather(for: CLLocation(latitude: newValue.coordinate.latitude, longitude: newValue.coordinate.longitude))
+        }
+    }
+    
+    func getTimeZone(location: CLLocationCoordinate2D, completion: @escaping ((TimeZone) -> Void)) {
+        let cllLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let geocoder = CLGeocoder()
+
+        geocoder.reverseGeocodeLocation(cllLocation) { placemarks, error in
+
+            if let error = error {
+                print(error.localizedDescription)
+
+            } else {
+                if let placemarks = placemarks {
+                    if let optTime = placemarks.first!.timeZone {
+                        completion(optTime)
+                    }
+                }
+            }
         }
     }
 }
