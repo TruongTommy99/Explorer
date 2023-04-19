@@ -124,7 +124,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: self.$toggleInformationSheet) {
-            InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
+//            InformationSheet(currentSuggestedLocation: self.currentSuggestedLocation)
+            InformationView(currentSuggestedLocation: self.currentSuggestedLocation)
         }
         .sheet(isPresented: self.$toggleConfigurationSheet) {
             MapConfigurationsView(mapConfiguration: mapConfigurations)
