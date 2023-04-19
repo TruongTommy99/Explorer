@@ -33,11 +33,13 @@ struct WeatherWeeklyView: View {
                                         .padding(.horizontal)
                                         .symbolRenderingMode(.multicolor)
                                     Text(forecast.lowTemperature.formatted())
-                                    ZStack{
+                                    ZStack(alignment: .trailing){
                                         Capsule()
-                                        LinearGradient(gradient: Gradient(colors: [.blue,.yellow]), startPoint: .top, endPoint: .bottom)
-                                            .ignoresSafeArea()
+                                        LinearGradient(gradient: Gradient(colors: [.blue,.yellow]), startPoint: .leading, endPoint: .trailing)
+                                            .clipShape(Capsule())
+                                            .frame(width: 70)
                                     }
+                                    .frame(height: 6)
                                     Text(forecast.highTemperature.formatted())
                                 }
                             }
