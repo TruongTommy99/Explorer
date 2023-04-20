@@ -14,7 +14,6 @@ class WeatherManager {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=3dd5b7cd58d36aeabc991e1e56bfc7da&units=imperial")
         else { fatalError("Missing URL") }
 
-
         let urlRequest = URLRequest(url: url)
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)

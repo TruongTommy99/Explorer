@@ -19,7 +19,7 @@ extension SuggestedLocation {
         SuggestedLocation(name: "Louvre Museum", flag: "🇫🇷", coordinate: .init(latitude: 48.86166644999687, longitude: 2.3386432626956237)),
         SuggestedLocation(name: "Bradenburg Gate", flag: "🇩🇪", coordinate: .init(latitude: 52.51636597633361, longitude: 13.377757742069402)),
         SuggestedLocation(name: "Piazza San Marco", flag: "🇮🇹", coordinate: .init(latitude:  45.43455829250173, longitude:12.338815022744887)),
-        SuggestedLocation(name: "Sydney Opera House", flag: "🇦🇺", coordinate: .init(latitude:  -33.85674309455637, longitude: 151.21530340851467)),
+        SuggestedLocation(name: "Lincoln Memorial", flag: "🇺🇸", coordinate: .init(latitude:  38.88933101428776, longitude: -77.05005075332554)),
         SuggestedLocation(name: "Sky Tower", flag: "🇳🇿", coordinate: .init(latitude:  -36.84779550088824, longitude: 174.7623197460293))
         
     ]

@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 enum ForecastChartType: String, Equatable, CaseIterable {
-    case Temperature
-    case Weather
+    case WindSpeed
+    case Pressure
+    case Humidity
     
     var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }

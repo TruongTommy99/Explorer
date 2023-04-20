@@ -49,7 +49,7 @@ struct InformationView: View {
                 
                 NavigationLink("See what the weather is going to look like the next few days →") {
                     if let detailedWeather {
-                        DetailedWeatherView(data: detailedWeather, currentChartType: .Temperature)
+                        DetailedWeatherView(data: detailedWeather, currentChartType: .WindSpeed)
                     } else { ProgressView() }
                 }
                 .padding()

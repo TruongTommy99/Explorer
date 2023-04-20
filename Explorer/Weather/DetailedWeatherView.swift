@@ -55,18 +55,62 @@ struct DetailedWeatherView: View {
                         .pickerStyle(.segmented)
                     
                     switch currentChartType {
-                    case .Temperature:
+                    case .WindSpeed:
                         Chart(data.list,id:\.dt) { element in
                             LineMark(x: .value("Day", element.dt_txt),
-                                      y: .value("Temperature", element.main.temp))
+                                     y: .value("Temperature", element.wind.speed))
                             .foregroundStyle(.blue)
                         }
-                    case .Weather:
-                        Chart(data.list,id:\.dt) { element in
-                            LineMark(x: .value("Day", element.dt_txt),
-                                      y: .value("Temperature", element.main.temp))
-                            .foregroundStyle(.red)
+                        .chartYAxisLabel("Temperature")
+                        .chartYAxis {
+                            AxisMarks(position: .leading, values: .automatic) { value in
+                                    AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1))
+                                    AxisValueLabel() {
+                                        if let intValue = value.as(Int.self) {
+                                            Text("\(intValue) m/s")
+                                            .font(.system(size: 10))
+                                        }
+                                    }
+                                }
                         }
+                        
+                    case .Pressure:
+                            Chart(data.list,id:\.dt) { element in
+                                LineMark(x: .value("Day", element.dt_txt),
+                                         y: .value("Pressure", element.main.pressure/1000))
+                                .foregroundStyle(.red)
+                            }
+                            .chartYAxisLabel("Pressure")
+                            .chartYScale(domain: [1.00,1.03])
+                            .chartYAxis {
+                                AxisMarks(position: .leading, values: .automatic) { value in
+                                        AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1))
+                                        AxisValueLabel() {
+                                            if let intValue = value.as(Double.self) {
+                                                Text("\(intValue,specifier: "%.2f") Pa")
+                                                .font(.system(size: 10))
+                                            }
+                                        }
+                                    }
+                            }
+                    case .Humidity:
+                                Chart(data.list,id:\.dt) { element in
+                                    LineMark(x: .value("Day", element.dt_txt),
+                                             y: .value("Humidity", element.main.humidity))
+                                    .foregroundStyle(.cyan)
+                                }
+                                .chartYAxisLabel("Humidity")
+                                .chartYAxis {
+                                    AxisMarks(position: .leading, values: .automatic) { value in
+                                            AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1))
+                                            AxisValueLabel() {
+                                                if let intValue = value.as(Int.self) {
+                                                    Text("\(intValue) %")
+                                                    .font(.system(size: 10))
+                                                }
+                                            }
+                                        }
+                                }
                     }
 
                 } header: {
@@ -74,9 +118,7 @@ struct DetailedWeatherView: View {
                 }
             }
             .navigationTitle("Additional Informations")
-            
         }
-
     }
 }
 

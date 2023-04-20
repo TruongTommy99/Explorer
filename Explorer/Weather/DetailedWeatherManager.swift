@@ -14,8 +14,6 @@ class DetailedWeatherManager {
                 
         else { fatalError("Missing URL") }
         
-        let array = [Double]()
-
         let urlRequest = URLRequest(url: url)
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
